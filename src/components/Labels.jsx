@@ -1,19 +1,18 @@
 import Grid from "@mui/material/Grid";
 import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import { styled } from "@mui/system";
+import TableSortLabel from "@mui/material/TableSortLabel";
 
-export const Labels = ({onPermissionOrderChanged}) => {
+export const Labels = ({ onSortTriggered, orderBy, order }) => {
 
-  const handleSortOrderChange = () => {
-
-    onPermissionOrderChanged("TODO")
+  const handleSortRequest = (event, property) => {
+    const isAsc = orderBy === property && order === "asc"
+    const newSortOrder = isAsc ? "desc" : "asc"
+    onSortTriggered(property, newSortOrder)
   }
 
   return (
-    <Grid container alignItems="center" justifyContent="center" sx={{ borderLeft:  "#FFFFFF solid 4px" }}>
+    <Grid container alignItems="center" justifyContent="center" sx={{ borderLeft:  "#FFFFFF solid 4px" }} pb={1}>
       <Grid container item alignItems="center" xs={6} md={5} gap={2}>
         <Grid item>
           <Checkbox
@@ -22,24 +21,28 @@ export const Labels = ({onPermissionOrderChanged}) => {
           />
         </Grid>
         <Grid item>
-          <Typography variant="label">
-            User
-          </Typography>
-          <ArrowContainer component={ArrowDownwardIcon} />
+          <TableSortLabel
+            active={orderBy === "name"}
+            direction={orderBy === "name" ? order : "asc"}
+            onClick={(e) => handleSortRequest(e, "name")}
+          >
+            <Typography variant="label">
+              User
+            </Typography>
+          </TableSortLabel>
         </Grid>
       </Grid>
       <Grid item xs={6} md={7}>
-        <Typography variant="label">
-          Permission
-        </Typography>
-        <ArrowContainer onClick={handleSortOrderChange} component={true ? ArrowUpwardIcon : ArrowDownwardIcon} />
+        <TableSortLabel
+          active={orderBy === "permission"}
+          direction={orderBy === "permission" ? order : "asc"}
+          onClick={(e) => handleSortRequest(e, "permission")}
+        >
+          <Typography variant="label">
+            Permission
+          </Typography>
+        </TableSortLabel>
       </Grid>
     </Grid>
   )
 }
-
-const ArrowContainer = styled(({ component: Component, ...props}) => <Component {...props} />)({
-  height: "12px",
-  color: "#718096",
-  cursor: "pointer"
-})

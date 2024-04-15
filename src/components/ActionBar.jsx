@@ -2,21 +2,23 @@ import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import { Box } from "@mui/system";
 import Button from "@mui/material/Button";
-import { ReactComponent as TrashIcon } from "../icons/trash-2.svg"
-import { ReactComponent as EditIcon } from "../icons/edit-2.svg"
+import { ReactComponent as TrashIcon } from "../icons/trash-2.svg";
+import { ReactComponent as EditIcon } from "../icons/edit-2.svg";
+import { memo } from "react";
 
-export const ActionBar = ({ selectedUsersCount }) => {
+const ActionBar = ({ selectedUsersCount }) => (
+  <ActionBarContainer pb={2}>
+    <Typography variant="subtitle">{selectedUsersCount} users selected</Typography>
+    <ButtonsContainer>
+      <Button color="secondary" variant="outlined" startIcon={<TrashIcon />}>Delete</Button>
+      <Button color="secondary" variant="outlined" startIcon={<EditIcon />}>Edit</Button>
+    </ButtonsContainer>
+  </ActionBarContainer>
+)
 
-  return (
-    <ActionBarContainer pb={2}>
-      <Typography variant="subtitle">{selectedUsersCount} users selected</Typography>
-      <ButtonsContainer>
-        <Button color="secondary" variant="outlined" startIcon={<TrashIcon />}>Delete</Button>
-        <Button color="secondary" variant="outlined" startIcon={<EditIcon />}>Edit</Button>
-      </ButtonsContainer>
-    </ActionBarContainer>
-  )
-}
+const MemoizedActionBar = memo(ActionBar)
+
+export default MemoizedActionBar
 
 const ActionBarContainer = styled(Box)({
   display: "flex",

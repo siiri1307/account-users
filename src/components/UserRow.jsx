@@ -1,10 +1,9 @@
 import { useState } from "react";
-import Checkbox from '@mui/material/Checkbox';
-import Avatar from '@mui/material/Avatar';
-import { renderBadge } from "./Badge"
-import React from 'react'
+import Checkbox from "@mui/material/Checkbox";
+import Avatar from "@mui/material/Avatar";
+import { renderBadge } from "./Badge";
 import { styled } from "@mui/system";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 import { StyledIconButton } from "./StyledIconButton";
 import { ReactComponent as TrashIcon } from "../icons/trash-2.svg";
 import { ReactComponent as EditIcon } from "../icons/edit-2.svg";
@@ -30,7 +29,13 @@ export const UserRow = ({ user, style, onUserSelectionChange, isSelected}) => {
   }
 
   return (
-    <FlexContainer container selected={isSelected} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} {...style}>
+    <FlexContainer
+      container
+      selected={isSelected}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      {...style}
+    >
       <Grid container alignItems="center" item xs={12} sm={12} md={5} spacing={2}>
         <Grid item>
           <Checkbox

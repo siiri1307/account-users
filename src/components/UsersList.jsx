@@ -1,13 +1,13 @@
 import { styled } from "@mui/system";
 import { useState } from "react";
 import { Box } from "@mui/system";
-import { ActionBar } from "./ActionBar";
-import MemoizedScrollList from "./ScrollList";
+import ActionBar from "./ActionBar";
+import ScrollList from "./ScrollList";
 import { useCallback } from "react";
 import { Labels } from "./Labels";
 
-export const UsersList = ({ users }) => {
-
+export const UsersList = ({ users, onSortTriggered, orderBy, order }) => {
+  
   const [selectedUserIds, setSelectedUserIds] = useState([])
 
   const setSelectedUsers = useCallback((id, selectionStatus) => {
@@ -18,15 +18,11 @@ export const UsersList = ({ users }) => {
     }
   }, []);
 
-  const orderByPermission = (data) => {
-    console.log("TODO")
-  }
-
   return (
     <UsersListContainer>
-      <ActionBar selectedUsersCount={selectedUserIds.length}></ActionBar>
-      <Labels onPermissionOrderChanged={orderByPermission}></Labels>
-      <MemoizedScrollList users={users} selectedUserIds={selectedUserIds} onUserSelectionChange={setSelectedUsers} />
+      <ActionBar selectedUsersCount={selectedUserIds.length} />
+      <Labels onSortTriggered={onSortTriggered} orderBy={orderBy} order={order} />
+      <ScrollList users={users} selectedUserIds={selectedUserIds} onUserSelectionChange={setSelectedUsers} />
     </UsersListContainer>
   )
 }
@@ -38,5 +34,5 @@ const UsersListContainer = styled(Box)({
   padding: "24px 32px",
   borderRadius: "4px",
   marginTop: "16px",
-  height: "80vh"
+  height: "80vh",
 })

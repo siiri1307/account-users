@@ -12,7 +12,8 @@ const ScrollList = ({ users, onUserSelectionChange, selectedUserIds }) => {
   const renderUser = ({ index, style }) => {
     const user = users[index]
     const selected = selectedUserIds.includes(user.id)
-    return <UserRow user={user} style={style} onUserSelectionChange={onUserSelectionChange} isSelected={selected} />
+
+    return <UserRow user={user} style={style} onUserSelectionChange={onUserSelectionChange} isSelected={selected} key={user.id} />
   }
 
   return (
