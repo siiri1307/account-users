@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   typography: {
@@ -58,7 +58,7 @@ const theme = createTheme({
     },
     MuiCheckbox: {
       styleOverrides: {
-        root: ({theme}) => ({
+        root: ({ theme }) => ({
           padding: 0,
           "&.Mui-checked": {
             color: theme.palette.selected,
@@ -66,6 +66,14 @@ const theme = createTheme({
         }),
       },
     },
+    // workaround for material-ui issue #35939
+    MuiTypography: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          fontFamily: theme.typography.fontFamily
+        })
+      }
+    }
   },
 });
 
