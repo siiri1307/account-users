@@ -18,6 +18,7 @@ export const Search = ({ onSearchChange }) => {
       variant="outlined"
       onChange={(e) => handleSearchChange(e.target.value)}
       sx={{
+        width: "100%",
         backgroundColor: "#FFFFFF",
         "& .MuiOutlinedInput-root": {
           "& fieldset": {
